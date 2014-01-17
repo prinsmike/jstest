@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Editing {{ .Title }}</title>
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<style type="text/css" media="screen">
+			#html-editor {
+				width: 100%;
+				height: 300px;
+			}
+			#css-editor {
+				width: 100%;
+				height: 300px;
+			}
+			#js-editor {
+				width: 100%;
+				height: 300px;
+			}
+		</style>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		{{ template "adminbar" . }}
+		
+		<h2>HTML:</h2>
+		<div id="html-editor">{{ .HTMLcode }}</div>
+
+		<h2>CSS:</h2>
+		<div id="css-editor">{{ .CSScode }}</div>
+
+		<h2>Javascript:</h2>
+		<div id="js-editor">{{ .JScode }}</div>
+
+		<form id="editform" action="edit" method="POST">
+			<input type="hidden" id="HTMLcode" name="HTMLcode" value="" />
+			<input type="hidden" id="CSScode" name="CSScode" value="" />
+			<input type="hidden" id="JScode" name="JScode" value="" />
+			<input type="submit" id="save" value="Save" />
+		</form>
+
+		<script src="ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var html_editor = ace.edit("html-editor");
+			html_editor.setTheme("ace/theme/monokai");
+			html_editor.getSession().setMode("ace/mode/html");
+
+			var css_editor = ace.edit("css-editor");
+			css_editor.setTheme("ace/theme/monokai");
+			css_editor.getSession().setMode("ace/mode/css");
+
+			var js_editor = ace.edit("js-editor");
+			js_editor.setTheme("ace/theme/monokai");
+			js_editor.getSession().setMode("ace/mode/javascript");
+
+			$("#editform").click(function(e) {
+				$("#HTMLcode").val(html_editor.getValue());
+				$("#CSScode").val(css_editor.getValue());
+				$("#JScode").val(js_editor.getValue());
+			})
+		</script>
+	</body>
+</html>
