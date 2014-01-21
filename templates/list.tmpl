@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JSTest Apps</title>
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<h1>JSTest Apps</h1>
+
+		<form action=""
+
+		{{ range . }}
+			<div class="{{ .AppName }}"><a href="{{ .AppName }}">{{ .AppTitle }}</a></div>
+		{{ end }}
+	</body>
+</html>
