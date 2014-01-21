@@ -25,11 +25,11 @@ func debug(str string) {
 }
 
 func getCode() App {
-	html_code, e := ioutil.ReadFile("/home/mike/go/src/github.com/prinsmike/jstest/templates/content.tmpl")
+	html_code, e := ioutil.ReadFile("/home/mike/jstest/templates/content.tmpl")
 	check(e)
-	css_code, e := ioutil.ReadFile("/home/mike/go/src/github.com/prinsmike/jstest/assets/css/style.css")
+	css_code, e := ioutil.ReadFile("/home/mike/jstest/assets/css/style.css")
 	check(e)
-	js_code, e := ioutil.ReadFile("/home/mike/go/src/github.com/prinsmike/jstest/assets/js/script.js")
+	js_code, e := ioutil.ReadFile("/home/mike/jstest/assets/js/script.js")
 	check(e)
 
 	return App{"JSTest Application", string(html_code), string(css_code), string(js_code)}
@@ -64,13 +64,13 @@ func main() {
 	m.Post("/edit", func(req *http.Request, r render.Render) {
 
 		debug(req.FormValue("HTMLcode"))
-		StringToFile(req.FormValue("HTMLcode"), "/home/mike/go/src/github.com/prinsmike/jstest/templates/content.tmpl")
+		StringToFile(req.FormValue("HTMLcode"), "/home/mike/jstest/templates/content.tmpl")
 
 		debug(req.FormValue("CSScode"))
-		StringToFile(req.FormValue("CSScode"), "/home/mike/go/src/github.com/prinsmike/jstest/assets/css/style.css")
+		StringToFile(req.FormValue("CSScode"), "/home/mike/jstest/assets/css/style.css")
 
 		debug(req.FormValue("JScode"))
-		StringToFile(req.FormValue("JScode"), "/home/mike/go/src/github.com/prinsmike/jstest/assets/js/script.js")
+		StringToFile(req.FormValue("JScode"), "/home/mike/jstest/assets/js/script.js")
 
 		apppost := getCode()
 		r.HTML(200, "edit", apppost)
